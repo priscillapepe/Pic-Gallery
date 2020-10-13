@@ -1,0 +1,113 @@
+{% extends 'pic/base.html' %} {% block content %}
+<div class="container-fluid landing" style="width: 100%; height: 90vh; background-image:url('https://images.unsplash.com/photo-1502514276381-1ea51dfe201c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80')">
+  <h2 class="text-center image" style="color:white;" >Welcome to the Pic-Gallery</h2>
+  <a href="#b" class="scroll"
+    ><button class="btn btn-sm btn-info image D-block mx-auto">
+      Browse
+    </button></a
+  >
+</div>
+
+<div class="container-fluid boded" id="b">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h3>Gallery</h3>
+      </div>
+      <div class="col-md-5">
+        <span id="locations">
+          {% for location in locations %}
+          <a
+            class="btn btn-outline-info btn-sm"
+            id="btn"
+            href="/location/{{location.name}}"
+            >{{location.name}}</a
+          >
+          {%endfor%}
+        </span>
+      </div>
+    </div>
+    <hr />
+    <div class="card-columns">
+      {% for image in images %}
+      <div class="card-columns">
+        <div class="card" data-toggle="modal" data-target="#{{image.id}}">
+          <img
+            src="{{image.image.url}}"
+            alt="{{image.name}}"
+            class="card-img img-fluid"
+            width="300"
+          />
+        </div>
+
+        <div
+          class="modal fade"
+          id="{{image.id}}"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-md"
+            role="document"
+          >
+            <div class="modal-content modalcard">
+              <div class="modal-header">
+                <h5 class="modal-title" id="imageheader">{{image.name}}</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img
+                  src="{{image.image.url}}"
+                  alt="{{image.name}}"
+                  class="img-fluid img-responsive"
+                />
+                <p class="imgdesc text-center">{{image.description}}</p>
+                <span class="btn btn-sm btn-outline-success"
+                  >{{image.category}}</span
+                >
+                <a
+                  href="/location/{{image.location}}"
+                  class="btn btn-sm btn-outline-info"
+                  >{{image.location}}</a
+                >
+              </div>
+              <div class="modal-footer">
+                <input
+                  class="form-control input-lg"
+                  type="text"
+                  value="{{image.image.url}}"
+                  id="{{image.id}}.url"
+                />
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="copyLink('{{image.id}}.url')"
+                >
+                  Copy
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>
