@@ -1,6 +1,15 @@
 {% extends 'pic/base.html' %} {% block content %}
-<div class="container-fluid landing" style="width: 100%; height: 90vh; background-image:url('https://images.unsplash.com/photo-1502514276381-1ea51dfe201c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80')">
-  <h2 class="text-center image" style="color:white;" >Welcome to the Pic-Gallery</h2>
+<div
+  class="container-fluid landing"
+  style="
+    width: 100%;
+    height: 90vh;
+    background-image: url('https://images.unsplash.com/photo-1502514276381-1ea51dfe201c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80');
+  "
+>
+  <h2 class="text-center image" style="color: white">
+    Welcome to the Pic-Gallery
+  </h2>
   <a href="#b" class="scroll"
     ><button class="btn btn-sm btn-info image D-block mx-auto">
       Browse
@@ -11,35 +20,39 @@
 <div class="container-fluid boded" id="b">
   <div class="container">
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-7" styles="text-center">
         <h3>Gallery</h3>
       </div>
-      <div class="col-md-5">
+      {% for location in locations %}
+      <div class="col-md-4">
         <span id="locations">
-          {% for location in locations %}
           <a
             class="btn btn-outline-info btn-sm"
             id="btn"
             href="/location/{{location.name}}"
             >{{location.name}}</a
           >
-          {%endfor%}
         </span>
       </div>
+      {%endfor%}
     </div>
     <hr />
-    <div class="card-columns">
-      {% for image in images %}
-      <div class="card-columns">
-        <div class="card" data-toggle="modal" data-target="#{{image.id}}">
+    {% for image in images %}
+    <div class="col-md-4">
+      <div class="card mt-2">
+        <div class="card-body" data-toggle="modal" data-target="#{{image.id}}">
           <img
             src="{{image.image.url}}"
             alt="{{image.name}}"
-            class="card-img img-fluid"
-            width="300"
+            class="card-img img-fluid mt-2"
+            width="100%"
           />
         </div>
-
+      </div>
+    </div>
+    {%endfor%}
+    <div class="card">
+        {% for image in images %}
         <div
           class="modal fade"
           id="{{image.id}}"
