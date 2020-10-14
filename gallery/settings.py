@@ -70,15 +70,15 @@ TEMPLATES = [
 # DEBUG = config('DEBUG', default=False, cast=bool)
 # # development
 # if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': 'gallery',
-           'USER': 'moringa',
-           'PASSWORD':'Access',
-       }
-       
-   }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gallery',
+        'USER': 'moringa',
+        'PASSWORD':'Access',
+    }
+    
+}
 # production
 # else:
 #    DATABASES = {
